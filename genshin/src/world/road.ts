@@ -17,6 +17,7 @@ export default class Road extends doraemon.Component
   zLength
   originPosList
   animationManager
+  door
 
   constructor(_doraemon: Experience, _firstCamera)
   {
@@ -96,7 +97,7 @@ export default class Road extends doraemon.Component
   async createDoor(_z: number)
   {
     const door = this.doraemon.assetManager.items['DOOR'] as STDLIB.GLTF
-
+    this.door = door
     // 设置传送门材质
     door.scene.traverse((_mesh: THREE.Mesh) =>
     {
@@ -142,22 +143,45 @@ export default class Road extends doraemon.Component
       // @ts-ignore
       action.paused = true;
     }
+    this.createWhitePlane()
   }
 
   // 打开传送门
   async openDoor()
   {
+    // 继续动画
     for (const action of Object.values(this.animationManager.actions))
     {
       // @ts-ignore
       action.paused = false;
     }
+
+    // 等待300ms
     await doraemon.sleep(300);
+
+    // 停止动画
     for (const action of Object.values(this.animationManager.actions))
     {
       // @ts-ignore
       action.paused = true;
     }
+  }
+
+  createWhitePlane()
+  {
+    const plane = this.doraemon.assetManager.items["WHITE_PLANE"] as STDLIB.GLTF
+    plane.scene.scale.setScalar(0.1)
+    plane.scene.position.copy(this.door.scene.position)
+
+    plane.scene.traverse((_mesh: THREE.Mesh) =>
+    {
+      if (_mesh.isMesh)
+      {
+        const material = _mesh.material as THREE.MeshStandardMaterial;
+        material.color = new THREE.Color("#ffffff").multiplyScalar(3);
+      }
+    })
+    this.doraemon.scene.add(plane.scene)
   }
 
   addUpdate()

@@ -43,6 +43,7 @@ export default class World extends doraemon.Component
 
       // 加载完成后隐藏载入界面
       document.querySelector(".loader-screen")?.classList.add("hollow");
+      document.querySelector(".door-button")?.classList.add("button-hollow");
 
       // 场景场景雾
       this.doraemon.scene.fog = new THREE.Fog(0x389af2, 5000, 10000);

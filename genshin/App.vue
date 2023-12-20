@@ -6,8 +6,10 @@
       <progress class="progress-bar" :value="progressValue" max="1"></progress>
     </div>
   </div>
-
-  <img class="door-button" src="/Genshin/ClickMe.png" @click="handleDoorOpen">
+  <img class="door-button" src="/Genshin/ClickMe.png" @click="handleDoorGenerate">
+  <div class="start-wrapper">
+    <span class="start-button" @click="handleStart">原神！启动</span>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -26,15 +28,22 @@ nextTick(() =>
   world = experience.world
 })
 
-const handleDoorOpen = () =>
+// 创建传送门
+const handleDoorGenerate = () =>
 {
-  // 打开传送门
+  // 创建传送门
   world.road.activeDoor()
 
   // 调整角色pose
   world.avatar.poseTo()
 }
 
+// 开始游戏
+const handleStart = () =>
+{
+  // 打开传送门
+  world.road.openDoor()
+}
 </script>
 
 <style>
@@ -61,9 +70,29 @@ body {
   position: absolute;
   right: 5%;
   bottom: 20%;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.start-wrapper {
+  width: 100%;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.482) 50%, rgba(0, 0, 0, 0) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-button {
+  font-family: DFKai-SB, KaiTi, "楷体", serif;
+  font-size: 18px;
+  color: #fff;
 }
 
 .door-button:hover {
-  scale: 1.05;
+  scale: 1.1;
 }
 </style>

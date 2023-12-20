@@ -30,6 +30,11 @@
   pointer-events: none;
 }
 
+.button-hollow {
+  opacity: 1;
+  animation: logo-fade 1.5s ease-in-out forwards;
+}
+
 progress {
   width: 400px;
   height: 5px;
