@@ -32,7 +32,11 @@
 
 .button-hollow {
   opacity: 1;
-  animation: logo-fade 1.5s ease-in-out forwards;
+  animation: logo-fade 1s ease-in-out forwards;
+}
+
+.start-hollow {
+  opacity: 1 !important;
 }
 
 progress {

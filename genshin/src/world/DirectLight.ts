@@ -74,12 +74,12 @@ export default class DirectLight extends doraemon.Component
     const debug = this.doraemon.debug
     const params = this.params
 
-    this.debugFolder = debug.pane.addFolder({
+    this.debugFolder = debug?.pane?.addFolder({
       title: 'directLight',
       expended: true
     })
 
-    this.debugFolder.addInput(
+    this.debugFolder?.addInput(
       this.params,
       'color',
       {
@@ -89,7 +89,7 @@ export default class DirectLight extends doraemon.Component
         this.dirLight.color.copy(new THREE.Color(val))
       })
 
-    this.debugFolder.addInput(
+    this.debugFolder?.addInput(
       this.dirLight,
       'intensity',
       {

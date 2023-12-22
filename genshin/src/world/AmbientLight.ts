@@ -35,14 +35,13 @@ export default class AmbientLight extends doraemon.Component
   createDebug()
   {
     const debug = this.doraemon.debug
-    const params = this.params
 
-    this.debugFolder = debug.pane.addFolder({
+    this.debugFolder = debug?.pane?.addFolder({
       title: 'directLight',
       expended: true
     })
 
-    this.debugFolder.addInput(
+    this.debugFolder?.addInput(
       this.params,
       'color',
       {
@@ -52,7 +51,7 @@ export default class AmbientLight extends doraemon.Component
         this.ambientLight.color = new THREE.Color(val)
       })
 
-    this.debugFolder.addInput(
+    this.debugFolder?.addInput(
       this.ambientLight,
       'intensity',
       {

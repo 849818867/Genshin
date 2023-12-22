@@ -1,15 +1,4 @@
 import * as THREE from 'three'
-// @ts-ignore
-import lights_fragment_beginToon from "../shaders/common/lights_fragment_beginToon.glsl";
-// @ts-ignore
-import ACES_fog_fragment from "../shaders/common/ACES_fog_fragment.glsl";
-// @ts-ignore
-import RE_Direct_ToonPhysical from "../shaders/common/RE_Direct_ToonPhysical.glsl";
-// @ts-ignore
-import RE_Direct_ToonPhysical_Avatar from "../shaders/common/RE_Direct_ToonPhysical_Avatar.glsl";
-// @ts-ignore
-import RE_Direct_ToonPhysical_Road from "../shaders/common/RE_Direct_ToonPhysical_Road.glsl";
-
 
 const groupBy = (array: Array<any>, fun) =>
 {
@@ -30,145 +19,43 @@ function debounce(func, delay)
 
   return function ()
   {
-    const context = this; // 保存this上下文
-    const args = arguments; // 获取参数列表
+    const context = this;
+    const args = arguments;
 
-    clearTimeout(timerId); // 清除已有的计时器
+    clearTimeout(timerId);
 
     timerId = setTimeout(() =>
     {
-      func.apply(context, args); // 应用原始函数并传入参数
+      func.apply(context, args);
     }, delay);
   };
 }
 
-const getToonMaterial = (material: THREE.MeshStandardMaterial) =>
+const useSoundPlay = async (_scene: THREE.Scene, _camera: THREE.Camera): Promise<Function> =>
 {
-  // console.log('shandshader', material)
-  material.metalness = 0.3
-  material.onBeforeCompile = shader =>
+  const camera = _camera
+  const scene = _scene
+
+  await navigator.mediaDevices.getUserMedia({ audio: true })
+
+  return (_bgmBuffer) =>
   {
-    let fragment = shader.fragmentShader
-    fragment = fragment.replace(
-      "#include <lights_physical_pars_fragment>",
-      `
-        #include <lights_physical_pars_fragment>
-        ${RE_Direct_ToonPhysical}
-      `
-    )
-    fragment = fragment.replace(
-      "#include <lights_fragment_begin>",
-      `
-            ${lights_fragment_beginToon}
-            `
-    );
-    fragment = fragment.replace(
-      "#include <fog_fragment>",
-      `
-            ${ACES_fog_fragment}
-            `
-    );
-    shader.fragmentShader = fragment
+    // 创建andio监听
+    const listener = new THREE.AudioListener();
+    // 创建一个audio源
+    const sound = new THREE.Audio(listener);
+
+    camera.add(listener);
+    scene.add(sound)
+    sound.setBuffer(_bgmBuffer)
+
+    return sound
   }
-  return material
 }
-
-const getToonMaterialAvatar = (material: THREE.MeshStandardMaterial) =>
-{
-  material.onBeforeCompile = shader =>
-  {
-    let fragment = shader.fragmentShader
-    fragment = fragment.replace(
-      "#include <lights_physical_pars_fragment>",
-      `
-        #include <lights_physical_pars_fragment>
-        ${RE_Direct_ToonPhysical_Avatar}
-      `
-    )
-    fragment = fragment.replace(
-      "#include <lights_fragment_begin>",
-      `
-            ${lights_fragment_beginToon}
-            `
-    );
-    fragment = fragment.replace(
-      "#include <fog_fragment>",
-      `
-            ${ACES_fog_fragment}
-            `
-    );
-    shader.fragmentShader = fragment
-  }
-  return material
-}
-
-const getToonMaterialRoad = (
-  material: THREE.MeshStandardMaterial,
-  renderer: THREE.WebGLRenderer
-) =>
-{
-  material.color.multiply(
-    new THREE.Color("#fffcfe").add(new THREE.Color().setRGB(0.015, 0, 0))
-  );
-  material.normalMap!.minFilter = THREE.LinearMipmapLinearFilter;
-  material.normalMap!.anisotropy = renderer.capabilities.getMaxAnisotropy() / 2;
-  material.roughnessMap!.anisotropy =
-    renderer.capabilities.getMaxAnisotropy() / 2;
-  material.map!.anisotropy = renderer.capabilities.getMaxAnisotropy() / 2;
-  material.roughness = 5;
-  material.metalness = 0;
-  material.onBeforeCompile = (shader) =>
-  {
-    let fragment = shader.fragmentShader;
-    fragment = fragment.replace(
-      "#include <lights_physical_pars_fragment>",
-      `
-          #include <lights_physical_pars_fragment>
-          ${RE_Direct_ToonPhysical_Road}
-          `
-    );
-    fragment = fragment.replace(
-      "#include <lights_fragment_begin>",
-      `
-          ${lights_fragment_beginToon}
-          `
-    );
-    shader.fragmentShader = fragment;
-  };
-  return material;
-};
-
-const getToonMaterialDoor = (material: THREE.MeshStandardMaterial) =>
-{
-  material.metalness = 0.15;
-  material.color = new THREE.Color("#454545");
-  material.onBeforeCompile = (shader) =>
-  {
-    let fragment = shader.fragmentShader;
-    fragment = fragment.replace(
-      "#include <lights_physical_pars_fragment>",
-      `
-          #include <lights_physical_pars_fragment>
-          ${RE_Direct_ToonPhysical_Road}
-          `
-    );
-    fragment = fragment.replace(
-      "#include <lights_fragment_begin>",
-      `
-          ${lights_fragment_beginToon}
-          `
-    );
-    shader.fragmentShader = fragment;
-  };
-  return material;
-};
 
 export
 {
   groupBy,
   debounce,
-  getToonMaterial,
-  getToonMaterialAvatar,
-  getToonMaterialRoad,
-  getToonMaterialDoor
+  useSoundPlay
 }

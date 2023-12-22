@@ -4,7 +4,7 @@ import * as STDLIB from "three-stdlib"
 import gsap from "gsap"
 
 import type Experience from "../Experience"
-import { getToonMaterialRoad, getToonMaterialDoor } from '../utils/common'
+import { getToonMaterialRoad, getToonMaterialDoor } from '../utils'
 
 export default class Road extends doraemon.Component
 {

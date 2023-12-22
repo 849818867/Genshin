@@ -1,6 +1,7 @@
 import * as doraemon from 'doraemonjs'
 import * as THREE from 'three'
 
+import { useSoundPlay } from '../utils'
 import Experience from '../Experience'
 import Background from './Background'
 import FarCloud from './FarCloud'
@@ -30,6 +31,10 @@ export default class World extends doraemon.Component
   road
   firstCamera
   avatar
+  bgmBuffer
+  clickMusicPlayer
+  openMusicPlayer
+  bgmPlayer
 
   constructor(_doraemon: Experience)
   {
@@ -44,6 +49,7 @@ export default class World extends doraemon.Component
       // 加载完成后隐藏载入界面
       document.querySelector(".loader-screen")?.classList.add("hollow");
       document.querySelector(".door-button")?.classList.add("button-hollow");
+
 
       // 场景场景雾
       this.doraemon.scene.fog = new THREE.Fog(0x389af2, 5000, 10000);
@@ -71,7 +77,34 @@ export default class World extends doraemon.Component
       this.road.addExisting()
       this.avatar = new Avatar(_doraemon, this.firstCamera)
       this.avatar.addExisting()
+
+      // 创建音效
+      this.creatMusic()
     })
   }
 
+  async creatMusic()
+  {
+    // 生成音效
+    const soundPlayerCreator = await useSoundPlay(this.doraemon.scene, this.doraemon.camera)
+
+    // bgm
+    const bgmBuffer = this.doraemon.assetManager.items['BGM']
+    const bgmPlayer: THREE.Audio = soundPlayerCreator(bgmBuffer)
+    bgmPlayer.setLoop(true);
+    bgmPlayer.play();
+    this.bgmPlayer = bgmPlayer
+
+    // 点击创建传送门
+    const duangBuffer = this.doraemon.assetManager.items['Genshin Impact [Duang]']
+    const clickMusicPlayer: THREE.Audio = soundPlayerCreator(duangBuffer)
+    clickMusicPlayer.setLoop(false);
+    this.clickMusicPlayer = clickMusicPlayer
+
+    // 打开传送门进入游戏
+    const doorThroughBuffer = this.doraemon.assetManager.items['Genshin Impact [DoorThrough]']
+    const openMusicPlayer: THREE.Audio = soundPlayerCreator(doorThroughBuffer)
+    openMusicPlayer.setLoop(false);
+    this.openMusicPlayer = openMusicPlayer
+  }
 }

@@ -5,8 +5,6 @@ import gsap from "gsap";
 
 import type Experience from "./Experience";
 
-import BloomTranstionEffect from "./effect/BloomEffect";
-
 export default class Postprogressing extends doraemon.Component
 {
   declare doraemon: Experience;

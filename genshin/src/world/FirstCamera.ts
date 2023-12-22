@@ -51,9 +51,14 @@ export default class FirstCamera extends doraemon.Component
     return this.center
   }
 
-  firstToThird()
+  // 冲进去
+  async diveIn()
   {
+    this.params.speed = 300
 
+    await doraemon.sleep(600)
+
+    this.params.speed = 0
   }
 
   addUpdate(): void

@@ -23,7 +23,7 @@ export default class Experience extends doraemon.Doraemon
       return Experience.instance
     }
 
-    super(_dom)
+    super(_dom, { debug: false })
 
     Experience.instance = this
 
@@ -52,7 +52,5 @@ export default class Experience extends doraemon.Doraemon
 
     // 启用合成器 添加后处理
     this.composer = new Postprogressing(this).composer
-
-
   }
 }

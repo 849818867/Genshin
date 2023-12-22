@@ -111,6 +111,7 @@ export class Doraemon
   {
     this.scene.traverse(_child =>
     {
+
       if (_child instanceof THREE.Mesh)
       {
         _child.geometry?.dispose();
@@ -119,11 +120,15 @@ export class Doraemon
         {
           if (value && typeof value.dispose === "function")
           {
+            console.log(value)
             value.dispose();
           }
         });
       }
     })
+
+    this.camera.clear()
+    this.scene.clear()
   }
 
   init()

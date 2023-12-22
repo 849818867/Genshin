@@ -13,12 +13,14 @@ export default class Avatar extends doraemon.Component
   mixer
   skeleton
   firstCamera
+  isFollowCamera
   poseTo: Function
 
   constructor(_doraemon: Experience, _firstCamera)
   {
     super(_doraemon)
 
+    this.isFollowCamera = true
     this.firstCamera = _firstCamera
     // 背景颜色层参数
     this.params = {
@@ -252,6 +254,9 @@ export default class Avatar extends doraemon.Component
         eventName: 'idle'
       })
       this.emit("door-open");
+
+      // 解除人物相机绑定
+      this.isFollowCamera = false
     }
   }
 
@@ -262,11 +267,17 @@ export default class Avatar extends doraemon.Component
 
   addUpdate(): void
   {
-    // 太阳光源随着相机位置移动
-    this.avatar.position.copy(
-      this.doraemon.camera.position.clone().add(new THREE.Vector3(0, -27, -100))
-    )
+    // 人物随着相机位置移动
+    if (this.isFollowCamera)
+    {
+      this.avatar.position.copy(
+        this.doraemon.camera.position.clone().add(new THREE.Vector3(0, -27, -100))
+      )
+    }
+
+    // 更新人物动画
     const delta = this.doraemon.clock.deltaTime
     this.mixer.update(delta)
+
   }
 }
