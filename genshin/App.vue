@@ -2,11 +2,11 @@
   <div id="webgl" ref="webglRef"></div>
   <div class="loader-screen">
     <div class="loading">
-      <img src="./Genshin/Genshin.png">
+      <img src="./public/Genshin/Genshin.png">
       <progress class="progress-bar" :value="progressValue" max="1"></progress>
     </div>
   </div>
-  <img class="door-button" ref="buttonRef" src="/Genshin/ClickMe.png" @click.once="handleDoorGenerate">
+  <img class="door-button" ref="buttonRef" src="./public/Genshin/ClickMe.png" @click.once="handleDoorGenerate">
   <div class="start-wrapper" ref="startRef">
     <span class="start-button" @click.once="handleStart">原神！启动</span>
   </div>
