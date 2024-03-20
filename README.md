@@ -1,6 +1,6 @@
 # 元神渲染复刻  ![](https://img.shields.io/badge/vuejs-3.2.36-blue)  ![](https://img.shields.io/badge/threejs-0.157.0-orange) ![](https://img.shields.io/badge/tweakpane-3.0.5-lightgreen) ![](https://img.shields.io/badge/stats.js-0.17.0-pink)
 
-<img src="https://github.com/849818867/Genshin/tree/main/logo/home.png" width="800px" height="368px"/>
+<img src="https://github.com/849818867/Genshin/tree/main/logo/logo.png" width="800px" height="368px"/>
 
 这是一个好玩的三维渲染案例，感谢gamemcu大佬提供的渲染案例，学习到了不少知识。本项目复刻了元神登录页面渲染效果，作为学习项目你需要对web3d基础知识有所了解:
 + 了解threejs： web3d前端渲染需要借助图形apiwebgl(将来webgpu)实现，threejs则是基于webgl封装的渲染库，提供更简单的web3d实现方案。
