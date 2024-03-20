@@ -17,10 +17,10 @@ void RE_Direct_ToonPhysical(const in IncidentLight directLight,const in vec3 geo
   #endif
   
   // 优化粗糙度
-  float new_roughness=(1.-step(.01,metalnessFactor))*pow(material.roughness,.4);
-  new_roughness+=step(.01,metalnessFactor)*pow(material.roughness,1.4);
+  // float new_roughness=(1.-step(.01,metalnessFactor))*pow(material.roughness,.4);
+  // new_roughness+=step(.01,metalnessFactor)*pow(material.roughness,1.4);
   PhysicalMaterial new_material=material;
-  new_material.roughness=new_roughness;
+  // new_material.roughness=new_roughness;
   
   reflectedLight.directSpecular+=irradiance*BRDF_GGX(directLight.direction,geometryViewDir,geometryNormal,new_material);
   reflectedLight.directDiffuse+=irradiance*BRDF_Lambert(new_material.diffuseColor);

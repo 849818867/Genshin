@@ -50,22 +50,21 @@ export default class World extends doraemon.Component
       document.querySelector(".loader-screen")?.classList.add("hollow");
       document.querySelector(".door-button")?.classList.add("button-hollow");
 
-
       // 场景场景雾
       this.doraemon.scene.fog = new THREE.Fog(0x389af2, 5000, 10000);
       // 创建并添加物体、光源
+      this.directLight = new DirectLight(_doraemon)
+      this.directLight.addExisting()
+      this.ambientLight = new AmbientLight(_doraemon)
+      this.ambientLight.addExisting()
       this.background = new Background(_doraemon)
       this.background.addExisting()
       this.farCloud = new FarCloud(_doraemon)
       this.farCloud.addExisting()
       this.column = new Column(_doraemon)
       this.column.addExisting()
-      this.ambientLight = new AmbientLight(_doraemon)
-      this.ambientLight.addExisting()
       this.polarLight = new PolarLight(_doraemon)
       this.polarLight.addExisting()
-      this.directLight = new DirectLight(_doraemon)
-      this.directLight.addExisting()
       this.cloud = new Cloud(_doraemon)
       this.cloud.addExisting()
       this.fog = new Fog(_doraemon)

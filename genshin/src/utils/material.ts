@@ -36,6 +36,10 @@ const getToonMaterial = (material: THREE.MeshStandardMaterial) =>
             ${ACES_fog_fragment}
             `
     );
+    // fragment = fragment.replace(
+    //   '#include <roughnessmap_fragment>',
+    //   ''
+    // )
     shader.fragmentShader = fragment
   }
   return material

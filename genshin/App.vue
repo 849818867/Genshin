@@ -10,6 +10,9 @@
   <div class="start-wrapper" ref="startRef">
     <span class="start-button" @click.once="handleStart">原神！启动</span>
   </div>
+  <div class="game-background">
+
+  </div>
 </template>
 
 <script setup lang="ts">

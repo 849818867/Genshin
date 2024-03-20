@@ -6,6 +6,11 @@ import Experience from '../Experience'
 import { meshList } from '../data/column'
 import { groupBy, getToonMaterial } from '../utils';
 
+//@ts-ignore
+import vertexShader from '../shaders/pbr/vertex.glsl';
+//@ts-ignore
+import fragmentShader from '../shaders/pbr/fragment.glsl'
+
 export default class column extends doraemon.Component
 {
   declare doraemon: Experience;
@@ -61,11 +66,60 @@ export default class column extends doraemon.Component
         if (mesh.isMesh)
         {
           const material = mesh.material as THREE.MeshStandardMaterial;
+
           const toonMaterial = getToonMaterial(material);
+
+          let materialPhone = new THREE.ShaderMaterial({
+            vertexShader,
+            fragmentShader,
+            uniforms: {
+              uMap: {
+                value: toonMaterial.map
+              },
+              uRoughnessMap: {
+                value: toonMaterial.roughnessMap
+              },
+              uMetalnessMap: {
+                value: toonMaterial.metalnessMap
+              },
+              uCameraPos: {
+                value: this.doraemon.camera.position
+              },
+              uLightDir: {
+                value: this.doraemon.world.directLight.dirLight.position.sub(this.doraemon.camera.position)
+              },
+              uLightColor: {
+                value: this.doraemon.world.directLight.dirLight.color
+              },
+              uLightRadiance: {
+                value: this.doraemon.world.directLight.dirLight.intensity
+              },
+              uAmbientColor: {
+                value: this.doraemon.world.ambientLight.ambientLight.color
+              }
+            }
+          })
+
+          const materialBasic = new THREE.MeshBasicMaterial();
+          const phong = new THREE.MeshPhongMaterial();
+          const materialPhisc = new THREE.MeshStandardMaterial();
+          materialPhisc.map = toonMaterial.map;
+          materialPhisc.roughnessMap = toonMaterial.roughnessMap;
+          materialPhisc.metalnessMap = toonMaterial.metalnessMap;
+
+          materialBasic.map = toonMaterial.map
+          phong.map = toonMaterial.map
+          // materialPhone.map = toonMaterial.map
+          // materialPhone.roughnessMap = toonMaterial.roughnessMap
+          // materialPhone.metalnessMap = toonMaterial.metalnessMap
+
+          // material.roughnessMap = null;
+          // material.metalnessMap = null;
           // 创建实例化渲染实例，这里使用的是相同的几何体放置在不同位置
           const instanceMesh = new THREE.InstancedMesh(
             mesh.geometry,
-            toonMaterial,
+            // toonMaterial,
+            materialPhone,
             item.instanceList.length
           )
           instanceMesh.castShadow = true
