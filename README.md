@@ -4,7 +4,7 @@
   <img src="https://github.com/849818867/Genshin/blob/main/logo/logo.png?raw=true" width="800px" height="368px"/>
 </div><br>
 
-感谢`gamemcu`大佬提供的渲染案例，从中学习到了不少三维知识。[此处为项目演示](http://pj-genshin.cn/)<br>
+感谢`gamemcu`大佬提供的渲染案例，从中学习到了不少三维知识。[:zap:项目演示](http://pj-genshin.cn/)<br>
 
 `web3d前端渲染`作为一个小众领域关注度不高且学习成本不低，典型吃力不讨好，如果能看到这个项目说明兄弟你也是一位孤勇者。言归正传，在上手项目之前你需要对以下概念有所了解：
 + `threejs`： web3d前端渲染需要借助图形api(`webgl`或`webgpu`)实现，threejs则是基于webgl封装的渲染库，提供更简单的web3d实现方案。
