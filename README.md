@@ -13,7 +13,20 @@
 
 ## Installation
 ```
-npm install water-js
+// 克隆项目
+git clone https://github.com/849818867/Genshin.git
+
+// 进入项目目录
+cd .\Genshin\
+
+// 安装依赖
+pnpm install
+
+// 该项目采用monorepo结构进行组织，genshin是渲染页面的目录
+cd .\genshin\
+
+// 启动项目
+pnpm run dev
 ```
 ## Examples
 ```js
