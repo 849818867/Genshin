@@ -60,6 +60,7 @@ export default class column extends doraemon.Component
     {
       const model = this.doraemon.assetManager.items[item.object] as STDLIB.GLTF
 
+      console.log("model", item)
       // this.scene.add(model.scene)
       model.scene.traverse((mesh: THREE.Mesh) =>
       {
