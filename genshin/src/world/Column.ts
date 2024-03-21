@@ -101,26 +101,11 @@ export default class column extends doraemon.Component
             }
           })
 
-          const materialBasic = new THREE.MeshBasicMaterial();
-          const phong = new THREE.MeshPhongMaterial();
-          const materialPhisc = new THREE.MeshStandardMaterial();
-          materialPhisc.map = toonMaterial.map;
-          materialPhisc.roughnessMap = toonMaterial.roughnessMap;
-          materialPhisc.metalnessMap = toonMaterial.metalnessMap;
-
-          materialBasic.map = toonMaterial.map
-          phong.map = toonMaterial.map
-          // materialPhone.map = toonMaterial.map
-          // materialPhone.roughnessMap = toonMaterial.roughnessMap
-          // materialPhone.metalnessMap = toonMaterial.metalnessMap
-
-          // material.roughnessMap = null;
-          // material.metalnessMap = null;
           // 创建实例化渲染实例，这里使用的是相同的几何体放置在不同位置
           const instanceMesh = new THREE.InstancedMesh(
             mesh.geometry,
-            // toonMaterial,
-            materialPhone,
+            toonMaterial,
+            // materialPhone,
             item.instanceList.length
           )
           instanceMesh.castShadow = true
