@@ -1,4 +1,4 @@
-# :bulb:元神渲染复刻  ![](https://img.shields.io/badge/vuejs-3.2.36-blue)  ![](https://img.shields.io/badge/threejs-0.157.0-orange) ![](https://img.shields.io/badge/tweakpane-3.0.5-lightgreen) ![](https://img.shields.io/badge/stats.js-0.17.0-pink)
+# :bulb:元神渲染复刻  ![](https://img.shields.io/badge/vuejs-3.2.36-blue)  ![](https://img.shields.io/badge/threejs-0.157.0-orange) ![](https://img.shields.io/badge/tweakpane-3.0.5-lightgreen) ![](https://img.shields.io/badge/stats.js-0.17.0-pink) ![](https://img.shields.io/badge/postprocessing-6.33.2-purple)
 
 <div align="center">
   <img src="https://github.com/849818867/Genshin/blob/main/logo/logo.png?raw=true" width="800px" height="368px"/>
