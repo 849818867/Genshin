@@ -40,19 +40,14 @@ pnpm run dev
 
 ## :rocket:性能优化
 #### :tada:自定义PBR
-threejs自带的pbr(Physically-Based Rendering)材质在性能上存在瓶颈，场景中大量使用pbr会使得渲染开销很大。个人猜测可能由于默认的MeshPhysicalMaterial需要满足各种功能(如fog、多光源计算)从而使得shader逻辑较为复杂，作为框架这样的设计也是一种权衡。本项目中部分物体的材质是基于实时渲染中常用的Cook-Torrance模型修改得到，因此需要我们通过自定义shader去实现完整的PBR光照模型，这样不仅可以满足渲染效果要求，还能缓解pbr性能压力。Cook-Torrance模型的具体数学原理可以参考[:zap:BRDF（Cook-Torrance 模型）](http://pj-genshin.cn/)。从下图中可以看到我们自定义的pbr材质在渲染整率上明显好于threejs默认的pbr材质。
+threejs自带的pbr(Physically-Based Rendering)材质在性能上存在瓶颈，场景中大量使用pbr会使得渲染开销很大。个人猜测可能由于默认的MeshPhysicalMaterial需要满足各种功能(如fog、多光源计算)从而使得shader逻辑较为复杂，作为框架这样的设计也是一种权衡。本项目中部分物体的材质是基于实时渲染中常用的Cook-Torrance模型修改得到，因此需要我们通过自定义shader去实现完整的PBR光照模型，这样不仅可以满足渲染效果要求，还能缓解pbr性能压力。Cook-Torrance模型的具体数学原理可以参考[:zap:BRDF（Cook-Torrance 模型）](http://pj-genshin.cn/)。下图对比了在未开启独显时自定义的pbr和threejs自带pbr之间的性能指标，可见自带pbr中确实存在一定性能瓶颈。
 
-<div style="display:flex; justify-content: center;">
-  <div >
-    <img src="https://github.com/849818867/Genshin/blob/main/logo/standard.png" width="200px" height="120px"/>
-    <div  align="center">Threejs PBR</div>
-  </div> 
+  | 材质 | 效果 | 帧数 |渲染延时|内存占用|
+|-------|-------|-------|-------|-------|
+| Threejs PBR | <img src="https://github.com/849818867/Genshin/blob/main/logo/standard.png" width="200px" height="120px"/> | 14fps |56ms|220mb|
+| Cook-Torrance PBR | <img src="https://github.com/849818867/Genshin/blob/main/logo/pbr.png" width="200px" height="120px"/> | 22fps |44ms|119mb|
 
-  <div>
-      <img src="https://github.com/849818867/Genshin/blob/main/logo/pbr.png" width="200px" height="120px"/>
-      <div align="center">Cook-Torrance PBR</div>
-  </div>
-</div>
+
 <br>
 
 
