@@ -41,7 +41,7 @@ const handleDoorGenerate = async () =>
   world.road.activeDoor()
 
   // 点击音效
-  world.clickMusicPlayer.play()
+  world.clickMusicPlayer?.play()
 
   // 调整角色pose
   await world.avatar.poseTo()
@@ -56,14 +56,14 @@ const handleStart = async () =>
   world.road.openDoor()
 
   // 穿过音效
-  world.openMusicPlayer.play()
+  world.openMusicPlayer?.play()
 
   // 相机进入门内
   world.firstCamera.diveIn()
 
   await doraemon.sleep(1000)
   // 停止bgm
-  world.bgmPlayer.pause()
+  world.bgmPlayer?.pause()
 
   // 移除按钮
   buttonRef.value?.classList.remove("button-hollow");

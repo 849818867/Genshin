@@ -23,7 +23,7 @@ export default class Experience extends doraemon.Doraemon
       return Experience.instance
     }
 
-    super(_dom, { debug: true })
+    super(_dom, { debug: false })
 
     Experience.instance = this
 

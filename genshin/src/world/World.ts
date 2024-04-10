@@ -84,26 +84,35 @@ export default class World extends doraemon.Component
 
   async creatMusic()
   {
-    // 生成音效
-    const soundPlayerCreator = await useSoundPlay(this.doraemon.scene, this.doraemon.camera)
+    let soundPlayerCreator = null
+    try
+    {
+      // 生成音效
+      soundPlayerCreator = await useSoundPlay(this.doraemon.scene, this.doraemon.camera)
 
-    // bgm
-    const bgmBuffer = this.doraemon.assetManager.items['BGM']
-    const bgmPlayer: THREE.Audio = soundPlayerCreator(bgmBuffer)
-    bgmPlayer.setLoop(true);
-    bgmPlayer.play();
-    this.bgmPlayer = bgmPlayer
+      // bgm
+      const bgmBuffer = this.doraemon.assetManager.items['BGM']
+      const bgmPlayer: THREE.Audio = soundPlayerCreator(bgmBuffer)
+      bgmPlayer.setLoop(true);
+      bgmPlayer.play();
+      this.bgmPlayer = bgmPlayer
 
-    // 点击创建传送门
-    const duangBuffer = this.doraemon.assetManager.items['Genshin Impact [Duang]']
-    const clickMusicPlayer: THREE.Audio = soundPlayerCreator(duangBuffer)
-    clickMusicPlayer.setLoop(false);
-    this.clickMusicPlayer = clickMusicPlayer
+      // 点击创建传送门
+      const duangBuffer = this.doraemon.assetManager.items['Genshin Impact [Duang]']
+      const clickMusicPlayer: THREE.Audio = soundPlayerCreator(duangBuffer)
+      clickMusicPlayer.setLoop(false);
+      this.clickMusicPlayer = clickMusicPlayer
 
-    // 打开传送门进入游戏
-    const doorThroughBuffer = this.doraemon.assetManager.items['Genshin Impact [DoorThrough]']
-    const openMusicPlayer: THREE.Audio = soundPlayerCreator(doorThroughBuffer)
-    openMusicPlayer.setLoop(false);
-    this.openMusicPlayer = openMusicPlayer
+      // 打开传送门进入游戏
+      const doorThroughBuffer = this.doraemon.assetManager.items['Genshin Impact [DoorThrough]']
+      const openMusicPlayer: THREE.Audio = soundPlayerCreator(doorThroughBuffer)
+      openMusicPlayer.setLoop(false);
+      this.openMusicPlayer = openMusicPlayer
+    } catch (e)
+    {
+      console.log(e)
+    }
+
+
   }
 }
