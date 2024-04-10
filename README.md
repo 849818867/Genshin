@@ -1,4 +1,4 @@
-# :bulb:元神渲染复刻  ![](https://img.shields.io/badge/vuejs-3.2.36-blue)  ![](https://img.shields.io/badge/threejs-0.157.0-orange) ![](https://img.shields.io/badge/tweakpane-3.0.5-lightgreen) ![](https://img.shields.io/badge/stats.js-0.17.0-pink)
+# :bulb:元神渲染复刻  ![](https://img.shields.io/badge/vuejs-3.2.36-blue)  ![](https://img.shields.io/badge/threejs-0.157.0-orange) ![](https://img.shields.io/badge/tweakpane-3.0.5-lightgreen) ![](https://img.shields.io/badge/stats.js-0.17.0-pink) ![](https://img.shields.io/badge/postprocessing-6.33.2-purple)
 
 <div align="center">
   <img src="https://github.com/849818867/Genshin/blob/main/logo/logo.png?raw=true" width="800px" height="368px"/>
@@ -42,7 +42,7 @@ pnpm run dev
 
 ## :rocket:性能优化
 #### :tada:自定义PBR
-threejs自带的PBR`(Physically-Based Rendering)`材质在性能上存在瓶颈，场景中大量使用PBR会使得渲染开销很大。个人猜测可能由于默认的`MeshPhysicalMaterial`需要满足各种功能(如fog、多光源计算)从而使得`shader`逻辑较为复杂，作为框架这样的设计也是一种权衡。本项目中部分物体的材质是基于实时渲染中常用的`Cook-Torrance`模型修改得到，因此需要我们通过自定义shader去实现完整的PBR光照模型，这样不仅可以满足渲染效果要求，还能缓解pbr性能压力。Cook-Torrance模型的具体数学原理可以参考[:zap:BRDF（Cook-Torrance 模型）](http://pj-genshin.cn/)。下图对比了在未开启独显时自定义的pbr和threejs自带PBR之间的性能指标，可见自带PBR中确实存在一定性能瓶颈。
+threejs自带的PBR`(Physically-Based Rendering)`材质在性能上存在瓶颈，场景中大量使用PBR会使得渲染开销很大。个人猜测可能由于默认的`MeshPhysicalMaterial`需要满足各种功能(如fog、多光源计算)从而使得`shader`逻辑较为复杂，作为框架这样的设计也是一种权衡。本项目中部分物体的材质是基于实时渲染中常用的`Cook-Torrance`模型修改得到，因此需要我们通过自定义shader去实现完整的PBR光照模型，这样不仅可以满足渲染效果要求，还能缓解pbr性能压力。Cook-Torrance模型的具体数学原理可以参考[:zap:BRDF（Cook-Torrance 模型）](https://zhuanlan.zhihu.com/p/160804623)。下图对比了在未开启独显时自定义的pbr和threejs自带PBR之间的性能指标，可见自带PBR中确实存在一定性能瓶颈。
 
   | 材质 | 效果 | 帧数 |渲染延时|内存占用|
 |-------|-------|-------|-------|-------|
