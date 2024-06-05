@@ -11,7 +11,7 @@
 + `web图形渲染管线`： webgl是基于图形渲染管线的实现，需要去了解`cpu数据`=>`顶点着色器`=>`光栅化`=>`片元着色器`=>`成像`的大概过程。
 + `计算机图形学基础`： 了解`成像原理`、`常见光照模型`、`pbr材质`、`阴影`、`全局环境光照`等概念。
 
-<br>[:zap:项目演示](http://pj-genshin.cn/)<br>
+<br>[:zap:项目演示](https://demo-1323526120.cos-website.ap-nanjing.myqcloud.com/)<br>
 
 ## :wrench:安装执行
 ```
